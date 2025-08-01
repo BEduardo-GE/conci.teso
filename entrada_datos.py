@@ -12,7 +12,7 @@ def fecha():
     while True:
         entrada = input("ingrese la fecha en formato dd/mm/aaaa: \t")
         try:
-            # Aquí va el código que deseas intentar, por ejemplo:
+            # usando datatime para validar el formato de fecha
             fecha_dt = datetime.datetime.strptime(entrada, "%d/%m/%Y")
             print("Fecha válida:", fecha_dt)
             return fecha_dt
@@ -32,43 +32,90 @@ def monto_fondo ():
             print("Por favor ingrese un número válido para el monto del fondo.")
             time.sleep(2)
 
-def ingreso_billetes ():
-    return [
-        float(input("ingrese el monto de 20000: \t")),
-        float(input("ingrese el monto de 10000: \t")),
-        float(input("ingrese el monto de 5000: \t")),
-        float(input("ingrese el monto de 2000: \t")),
-        float(input("ingrese el monto de 1000: \t"))
-    ]
+while True:
+    print("1. Ingreso de billetes")
+    print("2. Ingreso de monedas")
+    print("3. Ingreso de métodos de pago")
+    print("4. Guardar y salir")
+    opcion = input("Seleccione una opción: \t")
+    match opcion:
+        case "1":
+            while True:
+                billetes = {}
+                print("\n--- Ingreso de billetes ---")
 
-def ingreso_monedas():
-    moneda_500 = float(input("ingrese el monto en monedas de 500: \t"))
-    moneda_100 = float(input("ingrese el monto en monedas de 100: \t"))
-    moneda_50 = float(input("ingrese el monto en monedas de 50: \t"))
-    moneda_25 = float(input("ingrese el monto en monedas de 25: \t"))
-    moneda_10 = float(input("ingrese el monto en monedas de 10: \t"))
-    moneda_5 = float(input("ingrese el monto en monedas de 5: \t"))
-    time.sleep(2)
-    return [moneda_500, moneda_100, moneda_50, moneda_25, moneda_10, moneda_5]
+                try:
+                    billetes["50000"] = float(input("Ingrese el monto de 50000: \t"))
+                    billetes["20000"] = float(input("Ingrese el monto de 20000: \t"))
+                    billetes["10000"] = float(input("Ingrese el monto de 10000: \t"))
+                    billetes["5000"]  = float(input("Ingrese el monto de 5000: \t"))
+                    billetes["2000"]  = float(input("Ingrese el monto de 2000: \t"))
+                    billetes["1000"]  = float(input("Ingrese el monto de 1000: \t"))
 
-def ingreso_metodos_pago():
-    print(" Ingresos electrónicos y parciales:")
-    BAC = float(input("Monto BAC (tarjeta): "))
-    SINPE = float(input("Monto SINPE: "))
-    entrega_parcial = float(input("Entregas parciales: "))
-    return BAC, SINPE, entrega_parcial
+                    # Validar que todos los montos sean >= 0 lo que significa ¿Algún monto ingresado es menor que cero?
+                    if any(monto < 0 for monto in billetes.values()): # verifica si hay montos negativos, es un tipo bucle.
+                        print(" El monto de los billetes no puede ser negativo. Intente de nuevo.\n")
+                        continue  # vuelve a pedir todos los billetes
+
+                    print("\n Billetes ingresados correctamente:")
+                    for denom, monto in billetes.items():
+                        print(f"₡{denom}: {monto}")
+                    break  # sale del while si todo está correcto
+                except ValueError:
+                    print("Error: Ingrese solo valores numéricos.")
+        case "2":
+            while True:
+                monedas = {}
+                print("\n--- Ingreso de monedas ---")
+
+                try:
+                    monedas["500"] = float(input("Ingrese el monto de 100: \t"))
+                    monedas["100"]  = float(input("Ingrese el monto de 50: \t"))
+                    monedas["50"]  = float(input("Ingrese el monto de 25: \t"))
+                    monedas["25"]  = float(input("Ingrese el monto de 10: \t"))
+                    monedas["10"]   = float(input("Ingrese el monto de 5: \t"))
+                    monedas["15"]   = float(input("Ingrese el monto de 1: \t"))
+
+                    # Validar que todos los montos sean >= 0
+                    if any(monto < 0 for monto in monedas.values()):
+                        print(" El monto de las monedas no puede ser negativo. Intente de nuevo.\n")
+                        continue
+
+                    print("\n Monedas ingresadas correctamente:")
+                    for denom, monto in monedas.items():
+                        print(f"₡{denom}: {monto}")
+                    break
+                except ValueError:
+                    print("Error: Ingrese solo valores numéricos.")
+        case "3":
+            while True:
+                metodos_pago = {}
+                print("\n--- Ingreso de métodos de pago ---")
+
+                try:
+                    metodos_pago["Efectivo"] = float(input("Ingrese el monto en efectivo: \t"))
+                    metodos_pago["Tarjeta"]  = float(input("Ingrese el monto con tarjeta: \t"))
+                    metodos_pago["Transferencia"] = float(input("Ingrese el monto por transferencia: \t"))
+                    metodos_pago["Compra click"] = float(input("Ingrese el monto con crédito: \t"))
+                    metodos_pago["Otros"] = float(input("Ingrese el monto con crédito: \t"))
+                    # Validar que todos los montos sean >= 0
+                    if any(monto < 0 for monto in metodos_pago.values()):
+                        print(" El monto de los métodos de pago no puede ser negativo. Intente de nuevo.\n")
+                        continue
+
+                    print("\n Métodos de pago ingresados correctamente:")
+                    for metodo, monto in metodos_pago.items():
+                        print(f"{metodo}: ₡{monto}")
+                    break
+                except ValueError:
+                    print("Error: Ingrese solo valores numéricos.")
+        case "4":
+            print("Guardando datos y saliendo...")
+            time.sleep(2)
+            break  # Sale del bucle principal para guardar los datos y salir
+
 
 def ingresos_nets():
     ingresos_net = float(input("ingresos netos: \t"))
     time.sleep(1)
     return ingresos_net
-
-
-"""
-monto_20000 = float(input("ingrese el monto de 20000: \t"))
-    monto_10000 = float(input("ingrese el monto de 10000: \t"))
-    monto_5000 = float(input("ingrese el monto de 5000: \t"))
-    monto_2000 = float(input("ingrese el monto de 2000: \t"))
-    monto_1000 = float(input("ingrese el monto de 1000: \t"))
-    time.sleep(2)
-"""
