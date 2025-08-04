@@ -113,6 +113,20 @@ while True:
             print("Guardando datos y saliendo...")
             time.sleep(2)
             break  # Sale del bucle principal para guardar los datos y salir
+        # -------------------- NOTAS SOBRE DICCIONARIOS Y .items() --------------------
+
+# for denom, monto in billetes.items():
+# Esta es una forma de recorrer un diccionario con dos variables:
+# 'denom' toma la clave (denominación del billete) y 'monto' el valor (total ingresado de esa denominación)
+
+# El método .items() del diccionario devuelve una lista iterable de pares (clave, valor)
+# Ejemplo: billetes.items() -> dict_items([('50000', 100000), ('20000', 40000)])
+
+# Si recorriéramos solo con: for x in billetes:
+# Entonces solo obtendríamos las claves, y no podríamos acceder directamente a los montos.
+
+# El bucle for con .items() es útil para imprimir, validar o procesar tanto las claves como sus valores.
+
 
 
 def ingresos_nets():
