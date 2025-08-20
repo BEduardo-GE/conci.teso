@@ -69,15 +69,15 @@ while True:
                 print("\n--- Ingreso de monedas ---")
 
                 try:
-                    monedas["500"] = float(input("Ingrese el monto de 100: \t"))
-                    monedas["100"]  = float(input("Ingrese el monto de 50: \t"))
-                    monedas["50"]  = float(input("Ingrese el monto de 25: \t"))
-                    monedas["25"]  = float(input("Ingrese el monto de 10: \t"))
-                    monedas["10"]   = float(input("Ingrese el monto de 5: \t"))
-                    monedas["15"]   = float(input("Ingrese el monto de 1: \t"))
+                    monedas["500"] = float(input("Ingrese el monto de 500: \t"))
+                    monedas["100"]  = float(input("Ingrese el monto de 100: \t"))
+                    monedas["50"]  = float(input("Ingrese el monto de 50: \t"))
+                    monedas["25"]  = float(input("Ingrese el monto de 25: \t"))
+                    monedas["10"]   = float(input("Ingrese el monto de 10: \t"))
+                    monedas["5"]   = float(input("Ingrese el monto de 5: \t"))
 
                     # Validar que todos los montos sean >= 0
-                    if any(monto < 0 for monto in monedas.values()):
+                    if any(monto < 0 for monto in monedas.values()) :  # verifica si hay montos negativos, es un tipo bucle.
                         print(" El monto de las monedas no puede ser negativo. Intente de nuevo.\n")
                         continue
 
