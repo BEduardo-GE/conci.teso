@@ -1,20 +1,18 @@
 
-def suma_billetes(ingreso_billetes):
-    if not isinstance(ingreso_billetes, (list, tuple)):
-        raise ValueError("ingreso_billetes debe ser una lista o tupla")
-    return sum(ingreso_billetes)
+def suma_billetes(billetes):
+    return sum(billetes.values())
 
-def suma_monedas(ingreso_monedas):
-    return sum(ingreso_monedas)
+def suma_monedas(monedas):
+    return sum(monedas.values())
 
 def suma_efectivo(total_billetes, total_monedas):
     return total_billetes + total_monedas
 
-def metodos_pago(BAC, sinpe, entrega_parcial):
-    return BAC + sinpe + entrega_parcial
+def metodos_pago(metodos):
+    return sum(metodos.values())
  
-def total_reportado(billetes_total, monedas_total):
-    return billetes_total + monedas_total 
+def total_reportado(total_efectivo, monedas_total):
+    return total_efectivo + monedas_total 
 
 def total(total_reportado, monto_fondo ):
     return total_reportado - monto_fondo

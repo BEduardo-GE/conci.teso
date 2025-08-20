@@ -96,7 +96,7 @@ while True:
                     metodos_pago["Efectivo"] = float(input("Ingrese el monto en efectivo: \t"))
                     metodos_pago["Tarjeta"]  = float(input("Ingrese el monto con tarjeta: \t"))
                     metodos_pago["Transferencia"] = float(input("Ingrese el monto por transferencia: \t"))
-                    metodos_pago["Compra click"] = float(input("Ingrese el monto con crédito: \t"))
+                    metodos_pago["Compra click"] = float(input("Ingrese el monto con compra click: \t"))
                     metodos_pago["Otros"] = float(input("Ingrese el monto con crédito: \t"))
                     # Validar que todos los montos sean >= 0
                     if any(monto < 0 for monto in metodos_pago.values()):
@@ -112,7 +112,8 @@ while True:
         case "4":
             print("Guardando datos y saliendo...")
             time.sleep(2)
-            break  # Sale del bucle principal para guardar los datos y salir
+            break 
+               # Sale del bucle principal para guardar los datos y salir
         # -------------------- NOTAS SOBRE DICCIONARIOS Y .items() --------------------
 
 # for denom, monto in billetes.items():
@@ -128,8 +129,3 @@ while True:
 # El bucle for con .items() es útil para imprimir, validar o procesar tanto las claves como sus valores.
 
 
-
-def ingresos_nets():
-    ingresos_net = float(input("ingresos netos: \t"))
-    time.sleep(1)
-    return ingresos_net
