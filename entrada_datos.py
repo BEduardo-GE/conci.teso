@@ -2,6 +2,7 @@
 
 import datetime
 import time
+from main import main
 def ingreso_datos (): 
     caja = int(input("ingrese el numero de caja: \t"))
     cajero = input(" ingrese el nombre del cajero: \t")
@@ -31,6 +32,12 @@ def monto_fondo ():
         except ValueError:
             print("Por favor ingrese un número válido para el monto del fondo.")
             time.sleep(2)
+
+# Inicializar variables antes del ciclo principal
+billetes = {}
+monedas = {}
+metodos_pago = {}
+ingreso_neto = 0
 
 while True:
     print("1. Ingreso de billetes")
@@ -80,52 +87,53 @@ while True:
                     if any(monto < 0 for monto in monedas.values()) :  # verifica si hay montos negativos, es un tipo bucle.
                         print(" El monto de las monedas no puede ser negativo. Intente de nuevo.\n")
                         continue
-
-                    print("\n Monedas ingresadas correctamente:")
-                    for denom, monto in monedas.items():
-                        print(f"₡{denom}: {monto}")
-                    break
                 except ValueError:
-                    print("Error: Ingrese solo valores numéricos.")
+                    print("Erro de ingreso.")
         case "3":
             while True:
-                metodos_pago = {}
+                metodos_dict = {}
                 print("\n--- Ingreso de métodos de pago ---")
-
                 try:
-                    metodos_pago["Efectivo"] = float(input("Ingrese el monto en efectivo: \t"))
-                    metodos_pago["Tarjeta"]  = float(input("Ingrese el monto con tarjeta: \t"))
-                    metodos_pago["Transferencia"] = float(input("Ingrese el monto por transferencia: \t"))
-                    metodos_pago["Compra click"] = float(input("Ingrese el monto con compra click: \t"))
-                    metodos_pago["Otros"] = float(input("Ingrese el monto con crédito: \t"))
-                    # Validar que todos los montos sean >= 0
-                    if any(monto < 0 for monto in metodos_pago.values()):
-                        print(" El monto de los métodos de pago no puede ser negativo. Intente de nuevo.\n")
+                    metodos_dict["Efectivo"] = float(input("Ingrese el monto en efectivo: \t"))
+                    metodos_dict["Tarjeta"]  = float(input("Ingrese el monto con tarjeta: \t"))
+                    metodos_dict["Transferencia"] = float(input("Ingrese el monto por transferencia: \t"))
+                    metodos_dict["Compra click"] = float(input("Ingrese el monto con compra click: \t"))
+                    metodos_dict["Otros"] = float(input("Ingrese el monto con crédito: \t"))
+
+                    if any(monto < 0 for monto in metodos_dict.values()):
+                        print("El monto no puede ser negativo.\n")
                         continue
 
+                    # ✅ Aquí capturás el ingreso neto
+                    ingreso_neto = float(input("Ingrese el monto de ingresos netos del sistema: \t"))
+
+                    # Asignar metodos_dict a metodos_pago para usarlo fuera del case
+                    metodos_pago = metodos_dict
+
                     print("\n Métodos de pago ingresados correctamente:")
-                    for metodo, monto in metodos_pago.items():
+                    for metodo, monto in metodos_dict.items():
                         print(f"{metodo}: ₡{monto}")
                     break
                 except ValueError:
                     print("Error: Ingrese solo valores numéricos.")
+                    print("\n Métodos de pago ingresados correctamente:")
+                    for metodo, monto in metodos_dict.items():
+                        print(f"{metodo}: ₡{monto}")
+                    break
+                except ValueError:
+                    print("Error: Ingrese solo valores numéricos.")
+
         case "4":
             print("Guardando datos y saliendo...")
-            time.sleep(2)
-            break 
-               # Sale del bucle principal para guardar los datos y salir
-        # -------------------- NOTAS SOBRE DICCIONARIOS Y .items() --------------------
 
-# for denom, monto in billetes.items():
-# Esta es una forma de recorrer un diccionario con dos variables:
-# 'denom' toma la clave (denominación del billete) y 'monto' el valor (total ingresado de esa denominación)
+            # Validar si los datos están completos
+            if not billetes or not monedas or not metodos_pago or ingreso_neto == 0:
+                print("\n❌ Faltan datos. Asegúrese de ingresar billetes, monedas, métodos de pago e ingreso neto antes de continuar.")
+                continue
 
-# El método .items() del diccionario devuelve una lista iterable de pares (clave, valor)
-# Ejemplo: billetes.items() -> dict_items([('50000', 100000), ('20000', 40000)])
+    main(billetes, monedas, metodos_pago, ingreso_neto)
+    break
 
-# Si recorriéramos solo con: for x in billetes:
-# Entonces solo obtendríamos las claves, y no podríamos acceder directamente a los montos.
 
-# El bucle for con .items() es útil para imprimir, validar o procesar tanto las claves como sus valores.
 
 

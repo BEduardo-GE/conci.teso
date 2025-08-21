@@ -31,7 +31,3 @@ def main (billetes, monedas, metodos_dict, ingreso_neto):
     print("Total reportado:", total_rep)
     print("Total final (menos fondo):", total_final)
     print("Diferencia contra ingreso neto:", resultado_final)
-
-if __name__ == "__main__":
-    main ()  # Aquí puedes definir un valor para ingreso_neto si es necesario
-    
